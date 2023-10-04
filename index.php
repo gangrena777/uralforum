@@ -54,7 +54,7 @@
   <script type="text/javascript">
   	
 
-  	      function getPaginCat(){
+  	  function getPaginCat(){
         $.ajax({
           url: 'action.php',
           type: 'post',

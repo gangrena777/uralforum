@@ -53,14 +53,10 @@ if(!empty($_POST['categories'])  && $_POST['categories'] == 'all'){
 
   $page_limit = 10;
 
-
-                   
-
-                          $q = "SELECT  post_category.id AS cat_id, post_category.cat_name, post_category.author_cat_id, authors.id AS author_id, authors.author_name FROM `post_category` JOIN `authors` WHERE post_category.author_cat_id = authors.id ORDER BY post_category.id DESC LIMIT ".$offset.",".$page_limit;
+                          $q = "SELECT  post_category.id AS cat_id, post_category.cat_name, post_category.author_cat_id, authors.id AS author_id, authors.author_name FROM `post_category` JOIN `authors` ON post_category.author_cat_id = authors.id ORDER BY post_category.id DESC LIMIT ".$offset.",".$page_limit;
 
                           $result = array();
-                         //$authors = array();
-                         // $categ_ids = array();
+                   
                           $res = mysqli_query($link, $q);
 
 
@@ -71,13 +67,11 @@ if(!empty($_POST['categories'])  && $_POST['categories'] == 'all'){
                               
 
                              do{
-                                    //$row['author'] = array();
+                                
                                     $row['post_count'] = 0;
                                     $result[] = $row;
 
-                                   // $authors[] = $row['author_cat_id'];
-                                   // $categ_ids[] = $row['id'];
-
+                               
 
                                 } 
                                 while($row = mysqli_fetch_array($res));
@@ -85,7 +79,7 @@ if(!empty($_POST['categories'])  && $_POST['categories'] == 'all'){
                           
                           
 
-                                $sqll = "SELECT * FROM `posts` JOIN `authors` WHERE posts.author_id = authors.id ORDER BY date_create_post ASC";
+                                $sqll = "SELECT * FROM `posts` JOIN `authors` ON posts.author_id = authors.id ORDER BY date_create_post ASC";
 
                                 
                                   $all_posts = mysqli_query($link, $sqll);
@@ -155,13 +149,7 @@ if(!empty($_REQUEST['name'])  &&  !empty($_REQUEST['cat_name']) ){
                     }
     }
 
-        // $sqlll = "INSERT INTO post_category (`cat_name`, `author_cat_id`) VALUES('".$cat_name."', '".$author_id."')";
-
-        // $resss = mysqli_query($link, $sqlll);
-        // if($resss){
-        //    return  true;
-        // }
-
+  
 
       $sqlll = "INSERT INTO post_category (`cat_name`, `author_cat_id`) VALUES(?, ?)";
       $stmt = mysqli_prepare($link, $sqlll);
@@ -169,9 +157,8 @@ if(!empty($_REQUEST['name'])  &&  !empty($_REQUEST['cat_name']) ){
 
       $resss = mysqli_stmt_execute($stmt);
 
-        //Closing the statement
        mysqli_stmt_close($stmt);
-       //Closing the connection
+   
        mysqli_close($link);
      
      
@@ -196,13 +183,13 @@ if(!empty($_REQUEST['categ_id'])){
   $page_limit = 10;
 
  
-  $q = "SELECT posts.id AS post_id, posts.author_id, posts.date_create_post, authors.id,posts.text, authors.author_name, authors.date_register FROM `posts`, `authors` WHERE posts.author_id = authors.id AND posts.category_id = '$id'  ORDER BY date_create_post  LIMIT ".$offset." , ".$page_limit;
+            $q = "SELECT posts.id AS post_id, posts.author_id, posts.date_create_post, authors.id,posts.text, authors.author_name, authors.date_register FROM `posts`, `authors` WHERE posts.author_id = authors.id AND posts.category_id = '$id'  ORDER BY date_create_post  LIMIT ".$offset." , ".$page_limit;
 
-          $result = array();
+            $result = array();
 
   
 
-          $res = mysqli_query($link, $q);
+            $res = mysqli_query($link, $q);
 
 
           if(mysqli_num_rows($res)>0) 
@@ -279,7 +266,7 @@ if(!empty($_REQUEST['name'])  &&  !empty($_REQUEST['text'])  &&  !empty($_REQUES
                       
                     }
     }
-     echo json_encode($author_id);
+     //echo json_encode($author_id);
     $sqlll = "INSERT INTO posts (`text`, `author_id`,`date_create_post`, `category_id`) VALUES('".$text."', '".$author_id."', '".$date_create."' , '".$categId."')";
 
     $resss = mysqli_query($link, $sqlll);
