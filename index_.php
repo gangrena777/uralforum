@@ -112,27 +112,7 @@
 
                                 for(let i in obj ){
                                   var n = parseInt(i)+1;
-                                   let date_last_post, author_last_post_id, author_last_post; 
-                                   if(obj[i].date_last_post) {
-                                   	 		date_last_post = obj[i].date_last_post;
-                                   }else{
-                                   			date_last_post = "_";
-                                   }
-                                    ////////
-                                   if(obj[i].author_last_post){
-                                   		author_last_post = obj[i].author_last_post
-                                   }else{
-                                   	    author_last_post = "_";
-                                   }
-                                     ///////////
-                                    if(obj[i].author_last_post_id){
-                                   		author_last_post_id = obj[i].author_last_post_id
-                                   }else{
-                                   	    author_last_post_id = "_";
-                                   }
-                                   
-
-                                   block+="<li class='list-group-item   d-flex justify-content-between'><a href='category.php?categ_id="+obj[i].cat_id+" '>"+obj[i].cat_name+"</a><p>автор категории -"+obj[i].author_name+"</p>  <p>всего постов-"+obj[i].post_count+"</p>  <p>последний пост был :"+date_last_post+"</p><p>автор последнего поста - "+author_last_post+"(id - "+author_last_post_id+")</p></li>";
+                                   block+="<li class='list-group-item   d-flex justify-content-between'><a href='category.php?categ_id="+obj[i].id+" '>"+obj[i].cat_name+"</a><p>автор категории -"+obj[i]['author'].author_name+"</p>  <p>всего постов-"+obj[i].post_count+"</p>  <p>последний пост был :"+obj[i].date_last_post+"</p><p>автор последнего поста - "+obj[i].author_last_post+"(id - "+obj[i].author_last_post_id+")</p></li>";
                                     console.log(obj[i]);
                                 }
                                 block+="</ul>";  

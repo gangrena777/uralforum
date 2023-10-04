@@ -84,7 +84,7 @@ function getPosts(){
 
                                    for(let i in obj ){
                                        var n = parseInt(i)+1;
-                                         block+="<li class='list-group-item post  d-flex justify-content-between'><p>#"+n+"  создан : "+obj[i].date_create_post+"</p><p class='post_text'>\""+obj[i].text+"\"</p><p>автор сообщения  -"+obj[i].author_name+"  зарегистрирован : "+obj[i].date_register+"  оставил -"+obj[i].author_count_post+" сообщения</p></li>";
+                                         block+="<li class='list-group-item post  d-flex justify-content-between'><p>#"+n+"  создан : "+obj[i].date_create_post+"</p><p class='post_text'>\""+obj[i].text+"\"</p><p>автор сообщения  -"+obj[i].author['author_name']+"  зарегистрирован : "+obj[i].author['date_register']+"  оставил -"+obj[i].author_count_post+" сообщения</p></li>";
 
                                      }
                                    block+="</ul>";  
